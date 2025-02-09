@@ -11,3 +11,28 @@ terraform {
     prefix = "videoflowai"
   }
 }
+
+locals {
+  services = toset([
+    "run.googleapis.com",
+    "cloudfunctions.googleapis.com",
+    "pubsub.googleapis.com",
+    "storage.googleapis.com",
+    "secretmanager.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "youtube.googleapis.com",
+    "texttospeech.googleapis.com",
+    "iam.googleapis.com",
+  ])
+}
+
+resource "google_project_service" "service" {
+  for_each           = local.services
+  service            = each.value
+  disable_on_destroy = false
+}
+
+module "wif" {
+  source              = "./module/wif"
+  backend_bucket_name = google_storage_bucket.tfstate_backend.name
+}
