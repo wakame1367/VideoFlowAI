@@ -1,4 +1,4 @@
-name: '1.2. infra CD for dev'
+name: 'infra CD for dev'
 
 on:
   push:
@@ -17,8 +17,8 @@ jobs:
       id-token: write
       contents: read
     env:
-      WORKLOAD_IDENTITY_PROVIDER: "projects/500315244546/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
-      PROJECT_ID: "tmp-20240814"
+      WORKLOAD_IDENTITY_PROVIDER: "projects/216651416597/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+      PROJECT_ID: "aiagent-449708"
 
     steps:
       - name: Checkout
@@ -42,8 +42,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./env/dev
+        working-directory: ./terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./env/dev
+        working-directory: ./terraform
