@@ -7,7 +7,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "${var.project_name}-tfstate-backend"
-    prefix = var.project_name
+    bucket = "videoflowai-tfstate-backend"
+    prefix = "videoflowai"
   }
 }
