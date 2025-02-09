@@ -6,4 +6,8 @@ terraform {
       version = "~> 5.41.0"
     }
   }
+  backend "gcs" {
+    bucket = "${var.project_name}-tfstate-backend"
+    prefix = var.project_name
+  }
 }
