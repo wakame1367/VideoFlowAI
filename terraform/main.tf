@@ -37,6 +37,7 @@ resource "google_secret_manager_secret" "youtube_api_credentials" {
   secret_id = "youtube-api-credentials"
 
   replication {
+    auto {}
   }
 }
 
