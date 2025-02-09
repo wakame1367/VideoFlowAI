@@ -32,6 +32,19 @@ resource "google_project_service" "service" {
   disable_on_destroy = false
 }
 
+resource "google_secret_manager_secret" "youtube_api_credentials" {
+  project   = var.project_id
+  secret_id = "youtube-api-credentials"
+
+  replication {
+  }
+}
+
+resource "google_secret_manager_secret_version" "youtube_api_credentials_version" {
+  secret      = google_secret_manager_secret.youtube_api_credentials.id
+  secret_data = filebase64("credentials.json")
+}
+
 module "wif" {
   source              = "./module/wif"
   backend_bucket_name = google_storage_bucket.tfstate_backend.name
