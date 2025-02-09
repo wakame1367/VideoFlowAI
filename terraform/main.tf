@@ -31,3 +31,8 @@ resource "google_project_service" "service" {
   service            = each.value
   disable_on_destroy = false
 }
+
+module "wif" {
+  source              = "./module/wif"
+  backend_bucket_name = google_storage_bucket.tfstate_backend.name
+}
